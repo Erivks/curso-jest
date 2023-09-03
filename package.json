@@ -1,0 +1,35 @@
+{
+  "name": "curso-jest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "jest",
+    "lint": "eslint src/** test/** --fix",
+    "eslint": "eslint",
+    "secure-mode": "jest --watch --verbose=true"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Erivks/curso-jest.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Erivks/curso-jest/issues"
+  },
+  "homepage": "https://github.com/Erivks/curso-jest#readme",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.5.0",
+    "@typescript-eslint/parser": "^6.5.0",
+    "eslint": "^8.48.0",
+    "jest": "23.6.0",
+    "supertest": "3.3.0",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "express": "4.16.4"
+  }
+}
