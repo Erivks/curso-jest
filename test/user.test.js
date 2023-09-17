@@ -43,3 +43,15 @@ test("Não deve inserir usuário sem email", async () => {
     expect(result.body.error).toBe("Email é um attr obrigatorio");
 
 });
+
+
+test("Não deve inserir usuário sem senha", async () => {
+    const email = `${Date.now()}@mail.com`;
+
+    const result = await request(app).post("/users")
+        .send({ name: "Walter Mitty", mail: email });
+
+    expect(result.status).toBe(400);
+    expect(result.body.error).toBe("Senha é um attr obrigatorio");
+
+});
