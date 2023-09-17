@@ -1,6 +1,8 @@
 const request = require("supertest");
 const app = require("../src/app");
 
+const email = `${Date.now()}@mail.com`;
+
 test("Deve responder HTTP CODE 200", () => {
     return request(app).get("/users")
         .then((res) => {
@@ -16,8 +18,6 @@ test("Deve listar todos os usuários", () => {
 });
 
 test("Deve inserir usuário com sucesso", () => {
-    const email = `${Date.now()}@mail.com`;
-    
     return request(app).post("/users")
         .send({ name: "Walter Mitty", mail: email, passwd: "123456" })
         .then((res) => {
@@ -54,4 +54,12 @@ test("Não deve inserir usuário sem senha", async () => {
     expect(result.status).toBe(400);
     expect(result.body.error).toBe("Senha é um attr obrigatorio");
 
+});
+
+test("Não deve inserir usuário com email existente", async () => {
+    const result = await request(app).post("/users")
+        .send({ name: "Walter Mitty", mail: email, passwd: "123456" })
+
+    expect(result.status).toBe(400);
+    expect(result.body.error).toBe("Email ja existe");
 });
