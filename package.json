@@ -8,7 +8,9 @@
     "test": "jest",
     "lint": "eslint src/** test/** --fix",
     "eslint": "eslint",
-    "secure-mode": "jest --watch --verbose=true"
+    "secure-mode": "jest --watch --verbose=true",
+    "migrate": "knex migrate:make",
+    "migrate-latest": "knex migrate:latest"
   },
   "repository": {
     "type": "git",
