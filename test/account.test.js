@@ -18,3 +18,8 @@ test("Deve inserir conta com sucesso", async () => {
     expect(result.status).toBe(201);
     expect(result.body.name).toBe(accObj.name);
 });
+
+test("Deve listar todas as contas", async () => {
+    const result = await request(app).get(MAIN_ROUTE);
+    expect(result.body.length).toBeGreaterThanOrEqual(0);
+});
