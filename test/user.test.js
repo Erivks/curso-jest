@@ -34,3 +34,12 @@ test("Não deve inserir usuário sem nome", () => {
             expect(res.body.error).toBe("Nome é um attr obrigatorio")
         })
 });
+
+test("Não deve inserir usuário sem email", async () => {
+    const result = await request(app).post("/users")
+        .send({ name: "Walter Mitty", passwd: "123456" });
+
+    expect(result.status).toBe(400);
+    expect(result.body.error).toBe("Email é um attr obrigatorio");
+
+});

@@ -4,9 +4,16 @@ module.exports = (app) => {
     }
 
     const save = (user) => {
-        if (!user.name) return { error: "Nome é um attr obrigatório" }
-         
+        const res = validation(user);
+        if (res) return res;
+        
         return app.db("users").insert(user, "*");
+    }
+
+    const validation = (user) => {
+        if (!user.name) return { error: "Nome é um attr obrigatorio" }
+
+        if (!user.mail) return { error: "Email é um attr obrigatorio" } 
     }
 
     return { findAll, save }
