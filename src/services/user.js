@@ -1,13 +1,15 @@
+const __ENTITY__ = "users";
+
 module.exports = (app) => {
     const findAll = (filter = {}) => {
-        return app.db("users").where(filter).select();
+        return app.db(__ENTITY__).where(filter).select();
     }
 
     const save = async (user) => {
         const res = await validation(user);
         if (res) return res;
 
-        return app.db("users").insert(user, "*");
+        return app.db(__ENTITY__).insert(user, "*");
     }
 
     const validation = async (user) => {

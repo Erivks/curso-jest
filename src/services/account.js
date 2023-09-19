@@ -1,13 +1,23 @@
+const __ENTITY__ = "accounts";
+
 module.exports = (app) => {
     const findAll = (filter = {}) => {
-        return app.db("accounts").where(filter).select();
+        return app.db(__ENTITY__).where(filter).select();
     }
 
     const save = async (account) => {
         // const res = await validation(user);
         // if (res) return res;
 
-        return app.db("accounts").insert(account, "*");
+        return app.db(__ENTITY__).insert(account, "*");
+    }
+
+    const getByID = async (filter) => {
+        const account = await findAll(filter);
+
+        if (Array.isArray(account)) return account[0];
+
+        return account;
     }
 
     const validation = async (user) => {
@@ -22,5 +32,5 @@ module.exports = (app) => {
         if (userDB && userDB.length > 0) return { error: "Email ja existe" }
     }
 
-    return { findAll, save }
+    return { findAll, save, getByID }
 }

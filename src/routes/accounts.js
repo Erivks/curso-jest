@@ -12,5 +12,12 @@ module.exports = (app) => {
         res.status(201).json(result[0]);
     }
 
-    return { create, findAll };
+    const getByID = async (req, res) => {
+        const result = await app.services.account.getByID({ id: req.params.id });
+        
+        console.log("[RESPONSE] Routes::Account->getByID:", result);
+        res.status(200).json(result);
+    }
+
+    return { create, findAll, getByID };
 }
