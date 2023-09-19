@@ -9,4 +9,5 @@ module.exports = (app) => {
 
     app.route("/accounts/:id")
         .get(app.routes.accounts.getByID)
+        .put(app.routes.accounts.updateByID)
 }

@@ -20,6 +20,12 @@ module.exports = (app) => {
         return account;
     }
 
+    const updateByID = async (filter, dataToUpdate) => {
+        const result = await app.db(__ENTITY__).where(filter).update(dataToUpdate, "*");
+    
+        return result[0];
+    } 
+
     const validation = async (user) => {
 
         // Validações de obrigatoriedade
@@ -32,5 +38,5 @@ module.exports = (app) => {
         if (userDB && userDB.length > 0) return { error: "Email ja existe" }
     }
 
-    return { findAll, save, getByID }
+    return { findAll, save, getByID, updateByID }
 }

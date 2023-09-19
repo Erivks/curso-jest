@@ -19,5 +19,12 @@ module.exports = (app) => {
         res.status(200).json(result);
     }
 
-    return { create, findAll, getByID };
+    const updateByID = async (req, res) => {
+        const result = await app.services.account.updateByID({ id: req.params.id }, req.body);
+    
+        console.log("[RESPONSE] Routes::Account->updateByID:", result);
+        res.status(200).json(result);
+    }
+
+    return { create, findAll, getByID, updateByID };
 }

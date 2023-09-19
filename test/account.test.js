@@ -35,3 +35,14 @@ test("Deve retornar uma conta por ID", async () => {
     expect(response.body.name).toBe(accounts[0].name);
     expect(response.body.id).toBe(accounts[0].id);
 });
+
+test("Deve alterar uma conta", async () => {
+    const account = await app.db("accounts")
+        .insert({ name: "Acc To Update", user_id: user.id }, ["id"]);
+    
+    const response = await request(app).put(`${MAIN_ROUTE}/${account[0].id}`)
+        .send({ name: "Acc Updated"});
+
+    expect(response.status).toBe(200);
+    expect(response.body.name).toBe("Acc Updated");
+});
