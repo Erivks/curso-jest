@@ -1,3 +1,5 @@
+const ValidationError = require("../error/ValidationError");
+
 const __ENTITY__ = "accounts";
 
 module.exports = (app) => {
@@ -6,8 +8,7 @@ module.exports = (app) => {
     }
 
     const save = async (account) => {
-        // const res = await validation(user);
-        // if (res) return res;
+        validation(account);
 
         return app.db(__ENTITY__).insert(account, "*");
     }
@@ -30,16 +31,16 @@ module.exports = (app) => {
         return await app.db(__ENTITY__).where({ id }).del();
     }
 
-    const validation = async (user) => {
+    const validation = (account) => {
 
         // Validações de obrigatoriedade
-        if (!user.name) return { error: "Nome é um attr obrigatorio" }
-        if (!user.mail) return { error: "Email é um attr obrigatorio" } 
-        if (!user.passwd) return { error: "Senha é um attr obrigatorio" }
+        if (!account.name) throw new ValidationError("Nome é um attr obrigatorio");
+        //if (!user.mail) return { error: "Email é um attr obrigatorio" } 
+        //if (!user.passwd) return { error: "Senha é um attr obrigatorio" }
         
         // Validações de duplicidade
-        const userDB = await findAll({ mail: user.mail });
-        if (userDB && userDB.length > 0) return { error: "Email ja existe" }
+        //const userDB = await findAll({ mail: user.mail });
+        //if (userDB && userDB.length > 0) return { error: "Email ja existe" }
     }
 
     return { findAll, save, getByID, updateByID, deleteByID }

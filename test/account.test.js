@@ -19,6 +19,16 @@ test("Deve inserir conta com sucesso", async () => {
     expect(result.body.name).toBe(accObj.name);
 });
 
+test("Não deve inserir conta sem nome", async () => {
+    const accObj = { user_id: user.id };
+
+    const result = await request(app).post(MAIN_ROUTE)
+        .send(accObj);
+    
+    expect(result.status).toBe(400);
+    expect(result.body.error).toBe("Nome é um attr obrigatorio");
+});
+
 test("Deve listar todas as contas", async () => {
     const result = await request(app).get(MAIN_ROUTE);
     expect(result.body.length).toBeGreaterThanOrEqual(0);
