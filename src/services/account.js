@@ -24,7 +24,11 @@ module.exports = (app) => {
         const result = await app.db(__ENTITY__).where(filter).update(dataToUpdate, "*");
     
         return result[0];
-    } 
+    }
+
+    const deleteByID = async (id) => {
+        return await app.db(__ENTITY__).where({ id }).del();
+    }
 
     const validation = async (user) => {
 
@@ -38,5 +42,5 @@ module.exports = (app) => {
         if (userDB && userDB.length > 0) return { error: "Email ja existe" }
     }
 
-    return { findAll, save, getByID, updateByID }
+    return { findAll, save, getByID, updateByID, deleteByID }
 }

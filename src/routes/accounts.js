@@ -26,5 +26,12 @@ module.exports = (app) => {
         res.status(200).json(result);
     }
 
-    return { create, findAll, getByID, updateByID };
+    const deleteByID = async (req, res) => {
+        const result = await app.services.account.deleteByID(req.params.id);
+
+        console.log("[RESPONSE] Routes::Account->deleteByID:", result);
+        res.status(204).json(result);
+    }
+
+    return { create, findAll, getByID, updateByID, deleteByID };
 }
