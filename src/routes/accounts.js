@@ -4,13 +4,13 @@ module.exports = (app) => {
         res.status(200).json(result);
     }
 
-    const create = async (req, res) => {
+    const create = async (req, res, next) => {
         try {
             const result = await app.services.account.save(req.body);
+            console.log("[RESPONSE] Routes::Account->create:", result);
             res.status(201).json(result[0]);
         } catch (error) {
-            console.log("[RESPONSE] Routes::Account->create:", error);
-            res.status(400).json({ error: error.message });
+            next(error);
         }
     }
 
